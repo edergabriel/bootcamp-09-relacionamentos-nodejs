@@ -16,6 +16,13 @@ class CreateCustomerService {
 
   public async execute({ name, email }: IRequest): Promise<Customer> {
     // TODO
+    const customer = await this.customersRepository.findByEmail(email);
+
+    if(!customer) {
+      throw new AppError('Customer not found');
+    }
+
+    return customer;
   }
 }
 
